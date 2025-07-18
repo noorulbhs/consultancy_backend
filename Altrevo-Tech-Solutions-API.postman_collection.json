@@ -1,0 +1,1856 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+		"name": "Altrevo Tech Solutions API",
+		"description": "Complete API collection for Altrevo Tech Solutions backend with authentication and all endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345678"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('access_token', response.data.accessToken);",
+									"    pm.environment.set('refresh_token', response.data.refreshToken);",
+									"    console.log('Tokens saved to environment variables');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@altrevo.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login with admin credentials. This will automatically save the access token to environment variables."
+					}
+				},
+				{
+					"name": "Login as Editor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('access_token', response.data.accessToken);",
+									"    pm.environment.set('refresh_token', response.data.refreshToken);",
+									"    console.log('Editor tokens saved to environment variables');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"editor@altrevo.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login as editor user"
+					}
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\": \"{{refresh_token}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/auth/refresh",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"auth",
+								"refresh"
+							]
+						}
+					}
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\": \"{{refresh_token}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/auth/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"auth",
+								"logout"
+							]
+						}
+					}
+				}
+			],
+			"description": "Authentication endpoints for login, logout, and token management"
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "Get All Services (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/services?page=0&size=10&sort=sortOrder,asc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"services"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "sortOrder,asc"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Service by ID (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/services/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"services",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Featured Services (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/services/featured",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"services",
+								"featured"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Services (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/services?page=0&size=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"services"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Service (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"New Service\",\n    \"description\": \"Short description of the service\",\n    \"detailedDescription\": \"Detailed description of the service with all features and benefits\",\n    \"category\": \"Technology\",\n    \"icon\": \"fas fa-code\",\n    \"duration\": \"4-6 weeks\",\n    \"featured\": true,\n    \"status\": \"ACTIVE\",\n    \"sortOrder\": 10,\n    \"features\": [\"Feature 1\", \"Feature 2\", \"Feature 3\"],\n    \"technologies\": [\"React\", \"Node.js\", \"MongoDB\"],\n    \"deliverables\": [\"Deliverable 1\", \"Deliverable 2\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/services",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"services"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Service (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Service Title\",\n    \"description\": \"Updated description\",\n    \"detailedDescription\": \"Updated detailed description\",\n    \"category\": \"Updated Category\",\n    \"icon\": \"fas fa-updated\",\n    \"duration\": \"6-8 weeks\",\n    \"featured\": false,\n    \"status\": \"ACTIVE\",\n    \"sortOrder\": 5,\n    \"features\": [\"Updated Feature 1\", \"Updated Feature 2\"],\n    \"technologies\": [\"Updated Tech 1\", \"Updated Tech 2\"],\n    \"deliverables\": [\"Updated Deliverable 1\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/services/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"services",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Service (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/services/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"services",
+								"1"
+							]
+						}
+					}
+				}
+			],
+			"description": "Service management endpoints for both public and admin access"
+		},
+		{
+			"name": "Team Members",
+			"item": [
+				{
+					"name": "Get All Team Members (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/team?page=0&size=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"team"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Team Member by ID (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/team/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"team",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Featured Team Members (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/team/featured",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"team",
+								"featured"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Team Member (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Jane Doe\",\n    \"role\": \"Senior Developer\",\n    \"department\": \"Engineering\",\n    \"email\": \"jane.doe@altrevo.com\",\n    \"phone\": \"+1-555-0123\",\n    \"linkedinUrl\": \"https://linkedin.com/in/janedoe\",\n    \"photoUrl\": \"https://example.com/jane-doe.jpg\",\n    \"bio\": \"Jane is a passionate developer with expertise in full-stack development.\",\n    \"experience\": \"5+ years\",\n    \"education\": \"BS Computer Science\",\n    \"location\": \"San Francisco, CA\",\n    \"joinDate\": \"2024-01-15\",\n    \"isPublic\": true,\n    \"featured\": true,\n    \"sortOrder\": 1,\n    \"skills\": [\"JavaScript\", \"React\", \"Node.js\"],\n    \"achievements\": [\"Led 10+ successful projects\", \"Certified in AWS\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/team",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"team"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Team Member (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Name\",\n    \"role\": \"Updated Role\",\n    \"department\": \"Updated Department\",\n    \"email\": \"updated@altrevo.com\",\n    \"phone\": \"+1-555-9999\",\n    \"linkedinUrl\": \"https://linkedin.com/in/updated\",\n    \"photoUrl\": \"https://example.com/updated.jpg\",\n    \"bio\": \"Updated bio\",\n    \"experience\": \"10+ years\",\n    \"education\": \"MS Computer Science\",\n    \"location\": \"New York, NY\",\n    \"joinDate\": \"2024-01-15\",\n    \"isPublic\": true,\n    \"featured\": false,\n    \"sortOrder\": 2,\n    \"skills\": [\"Updated Skill 1\", \"Updated Skill 2\"],\n    \"achievements\": [\"Updated Achievement 1\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/team/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"team",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Team Member (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/team/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"team",
+								"1"
+							]
+						}
+					}
+				}
+			],
+			"description": "Team member management endpoints"
+		},
+		{
+			"name": "Testimonials",
+			"item": [
+				{
+					"name": "Get All Testimonials (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/testimonials?page=0&size=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"testimonials"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Testimonial by ID (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/testimonials/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"testimonials",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Featured Testimonials (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/testimonials/featured",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"testimonials",
+								"featured"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Testimonial (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Client\",\n    \"designation\": \"CEO\",\n    \"company\": \"Client Company\",\n    \"companyLogo\": \"https://example.com/logo.png\",\n    \"message\": \"Excellent service and professional team. Highly recommended!\",\n    \"rating\": 5,\n    \"photoUrl\": \"https://example.com/john-client.jpg\",\n    \"published\": true,\n    \"featured\": true,\n    \"testimonialDate\": \"2024-07-01\",\n    \"projectType\": \"Web Development\",\n    \"location\": \"San Francisco, CA\",\n    \"sortOrder\": 1,\n    \"tags\": [\"web development\", \"professional\", \"quality\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/testimonials",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"testimonials"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Testimonial (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Client Name\",\n    \"designation\": \"Updated Designation\",\n    \"company\": \"Updated Company\",\n    \"companyLogo\": \"https://example.com/updated-logo.png\",\n    \"message\": \"Updated testimonial message\",\n    \"rating\": 4,\n    \"photoUrl\": \"https://example.com/updated-photo.jpg\",\n    \"published\": true,\n    \"featured\": false,\n    \"testimonialDate\": \"2024-07-01\",\n    \"projectType\": \"Updated Project Type\",\n    \"location\": \"Updated Location\",\n    \"sortOrder\": 2,\n    \"tags\": [\"updated\", \"testimonial\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/testimonials/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"testimonials",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Testimonial (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/testimonials/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"testimonials",
+								"1"
+							]
+						}
+					}
+				}
+			],
+			"description": "Testimonial management endpoints"
+		},
+		{
+			"name": "Blog Posts",
+			"item": [
+				{
+					"name": "Get All Blog Posts (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog?page=0&size=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Blog Post by ID (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Blog Post by Slug (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog/slug/getting-started-cloud-migration",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"slug",
+								"getting-started-cloud-migration"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Featured Blog Posts (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog/featured",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"featured"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Blog Post (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"New Blog Post Title\",\n    \"slug\": \"new-blog-post-title\",\n    \"summary\": \"Brief summary of the blog post\",\n    \"excerpt\": \"Short excerpt to display in listings\",\n    \"content\": \"<h2>Introduction</h2><p>Full content of the blog post with HTML formatting...</p>\",\n    \"authorName\": \"John Author\",\n    \"authorTitle\": \"Senior Developer\",\n    \"authorAvatar\": \"https://example.com/author.jpg\",\n    \"authorBio\": \"John is a senior developer with 10+ years of experience\",\n    \"category\": \"Technology\",\n    \"readingTime\": \"5 min read\",\n    \"featured\": true,\n    \"featuredImage\": \"https://example.com/featured-image.jpg\",\n    \"status\": \"PUBLISHED\",\n    \"metaTitle\": \"SEO optimized title\",\n    \"metaDescription\": \"SEO optimized description\",\n    \"sortOrder\": 1,\n    \"tags\": [\"technology\", \"development\", \"tutorial\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/blog",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"blog"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Blog Post (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Blog Post Title\",\n    \"slug\": \"updated-blog-post-title\",\n    \"summary\": \"Updated summary\",\n    \"excerpt\": \"Updated excerpt\",\n    \"content\": \"<h2>Updated Content</h2><p>Updated content...</p>\",\n    \"authorName\": \"Updated Author\",\n    \"authorTitle\": \"Updated Title\",\n    \"authorAvatar\": \"https://example.com/updated-author.jpg\",\n    \"authorBio\": \"Updated bio\",\n    \"category\": \"Updated Category\",\n    \"readingTime\": \"8 min read\",\n    \"featured\": false,\n    \"featuredImage\": \"https://example.com/updated-image.jpg\",\n    \"status\": \"PUBLISHED\",\n    \"metaTitle\": \"Updated SEO title\",\n    \"metaDescription\": \"Updated SEO description\",\n    \"sortOrder\": 2,\n    \"tags\": [\"updated\", \"blog\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/blog/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"blog",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Blog Post (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/blog/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"blog",
+								"1"
+							]
+						}
+					}
+				}
+			],
+			"description": "Blog post management endpoints"
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "Get All Jobs (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/jobs?page=0&size=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"jobs"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Job by ID (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/jobs/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"jobs",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Featured Jobs (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/jobs/featured",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"jobs",
+								"featured"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Job (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Full Stack Developer\",\n    \"department\": \"Engineering\",\n    \"location\": \"Remote\",\n    \"type\": \"Full-time\",\n    \"level\": \"Mid\",\n    \"salaryMin\": 80000,\n    \"salaryMax\": 120000,\n    \"salaryCurrency\": \"USD\",\n    \"experience\": 4,\n    \"openings\": 2,\n    \"description\": \"We are looking for a talented Full Stack Developer to join our team...\",\n    \"isOpen\": true,\n    \"isPublic\": true,\n    \"featured\": true,\n    \"requirements\": [\"4+ years experience\", \"React/Node.js expertise\", \"Database knowledge\"],\n    \"skills\": [\"React\", \"Node.js\", \"MongoDB\", \"TypeScript\"],\n    \"benefits\": [\"Health insurance\", \"Remote work\", \"Learning budget\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/jobs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"jobs"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Job (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Job Title\",\n    \"department\": \"Updated Department\",\n    \"location\": \"Updated Location\",\n    \"type\": \"Part-time\",\n    \"level\": \"Senior\",\n    \"salaryMin\": 90000,\n    \"salaryMax\": 140000,\n    \"salaryCurrency\": \"USD\",\n    \"experience\": 6,\n    \"openings\": 1,\n    \"description\": \"Updated job description...\",\n    \"isOpen\": true,\n    \"isPublic\": true,\n    \"featured\": false,\n    \"requirements\": [\"Updated requirement 1\", \"Updated requirement 2\"],\n    \"skills\": [\"Updated skill 1\", \"Updated skill 2\"],\n    \"benefits\": [\"Updated benefit 1\", \"Updated benefit 2\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/jobs/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"jobs",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Job (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/jobs/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"jobs",
+								"1"
+							]
+						}
+					}
+				}
+			],
+			"description": "Job management endpoints"
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get All Projects (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/projects?page=0&size=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"projects"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Project by ID (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"projects",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Project (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"PROJ-NEW-001\",\n    \"name\": \"New Project\",\n    \"description\": \"Description of the new project\",\n    \"clientName\": \"Client Name\",\n    \"clientEmail\": \"client@example.com\",\n    \"clientPhone\": \"+1-555-0123\",\n    \"clientCompany\": \"Client Company\",\n    \"startDate\": \"2024-08-01\",\n    \"endDate\": \"2024-12-31\",\n    \"estimatedBudget\": 100000,\n    \"actualBudget\": 0,\n    \"status\": \"PLANNING\",\n    \"priority\": \"HIGH\",\n    \"progress\": 0,\n    \"category\": \"Web Development\",\n    \"projectManager\": \"John Manager\",\n    \"technologies\": [\"React\", \"Node.js\", \"MongoDB\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/projects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"projects"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Project (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"projectCode\": \"PROJ-UPD-001\",\n    \"name\": \"Updated Project\",\n    \"description\": \"Updated description\",\n    \"clientName\": \"Updated Client\",\n    \"clientEmail\": \"updated@example.com\",\n    \"clientPhone\": \"+1-555-9999\",\n    \"clientCompany\": \"Updated Company\",\n    \"startDate\": \"2024-08-01\",\n    \"endDate\": \"2024-12-31\",\n    \"estimatedBudget\": 120000,\n    \"actualBudget\": 50000,\n    \"status\": \"ACTIVE\",\n    \"priority\": \"MEDIUM\",\n    \"progress\": 50,\n    \"category\": \"Updated Category\",\n    \"projectManager\": \"Updated Manager\",\n    \"technologies\": [\"Updated Tech 1\", \"Updated Tech 2\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"projects",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Project (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/projects/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"projects",
+								"1"
+							]
+						}
+					}
+				}
+			],
+			"description": "Project management endpoints"
+		},
+		{
+			"name": "Enquiries",
+			"item": [
+				{
+					"name": "Submit Enquiry (Public)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Enquirer\",\n    \"email\": \"john@example.com\",\n    \"phone\": \"+1-555-0123\",\n    \"company\": \"Example Company\",\n    \"subject\": \"consultation\",\n    \"service\": \"Cloud Migration\",\n    \"message\": \"I would like to know more about your cloud migration services.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/enquiries",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"enquiries"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get All Enquiries (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/enquiries?page=0&size=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"enquiries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Enquiry by ID (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/enquiries/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"enquiries",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Mark Enquiry as Read (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/enquiries/1/mark-read",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"enquiries",
+								"1",
+								"mark-read"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Enquiry (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/enquiries/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"enquiries",
+								"1"
+							]
+						}
+					}
+				}
+			],
+			"description": "Enquiry management endpoints"
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Get Dashboard Overview (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/dashboard/overview",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"dashboard",
+								"overview"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Comprehensive Dashboard (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/dashboard/comprehensive",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"dashboard",
+								"comprehensive"
+							]
+						}
+					}
+				}
+			],
+			"description": "Dashboard analytics endpoints"
+		},
+		{
+			"name": "Feature Toggles",
+			"item": [
+				{
+					"name": "Get All Feature Toggles (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/feature-toggles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"feature-toggles"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Feature Toggle by ID (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/feature-toggles/stats-section",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"feature-toggles",
+								"stats-section"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create Feature Toggle (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"new-feature\",\n    \"name\": \"New Feature\",\n    \"description\": \"Description of the new feature\",\n    \"enabled\": true,\n    \"section\": \"home\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/feature-toggles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"feature-toggles"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Feature Toggle (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"stats-section\",\n    \"name\": \"Updated Feature Name\",\n    \"description\": \"Updated description\",\n    \"enabled\": false,\n    \"section\": \"home\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/feature-toggles/stats-section",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"feature-toggles",
+								"stats-section"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Feature Toggle (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/feature-toggles/stats-section",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"feature-toggles",
+								"stats-section"
+							]
+						}
+					}
+				}
+			],
+			"description": "Feature toggle management endpoints"
+		},
+		{
+			"name": "Webhooks",
+			"item": [
+				{
+					"name": "Get All Webhook Events (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/webhooks?page=0&size=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"webhooks"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Webhook Event by ID (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/webhooks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"webhooks",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Retry Webhook Event (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/webhooks/1/retry",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"webhooks",
+								"1",
+								"retry"
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Webhook Stats (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/webhooks/stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"webhooks",
+								"stats"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete Webhook Event (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/webhooks/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"webhooks",
+								"1"
+							]
+						}
+					}
+				}
+			],
+			"description": "Webhook event management endpoints"
+		},
+		{
+			"name": "File Upload",
+			"item": [
+				{
+					"name": "Upload File (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"upload"
+							]
+						}
+					}
+				},
+				{
+					"name": "Upload Multiple Files (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/upload/multiple",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"upload",
+								"multiple"
+							]
+						}
+					}
+				}
+			],
+			"description": "File upload endpoints"
+		},
+		{
+			"name": "Site Settings",
+			"item": [
+				{
+					"name": "Get Site Settings (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/site-settings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"site-settings"
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Site Settings (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyName\": \"Updated Company Name\",\n    \"tagline\": \"Updated tagline\",\n    \"description\": \"Updated description\",\n    \"logoUrl\": \"https://example.com/updated-logo.png\",\n    \"faviconUrl\": \"https://example.com/updated-favicon.png\",\n    \"email\": \"updated@altrevo.com\",\n    \"phone\": \"+1-555-UPDATED\",\n    \"address\": \"Updated Address\",\n    \"city\": \"Updated City\",\n    \"state\": \"Updated State\",\n    \"country\": \"Updated Country\",\n    \"zipCode\": \"12345\",\n    \"socialLinkedin\": \"https://linkedin.com/company/updated\",\n    \"socialFacebook\": \"https://facebook.com/updated\",\n    \"socialInstagram\": \"https://instagram.com/updated\",\n    \"metaTitle\": \"Updated Meta Title\",\n    \"metaDescription\": \"Updated meta description\",\n    \"metaKeywords\": \"updated, keywords\",\n    \"copyrightText\": \"© 2024 Updated Company. All rights reserved.\",\n    \"contactRecipientEmail\": \"updated-contact@altrevo.com\",\n    \"projectsCompleted\": 200,\n    \"projectsCompletedLabel\": \"Projects Completed\",\n    \"clientsServed\": 100,\n    \"clientsServedLabel\": \"Happy Clients\",\n    \"yearsExperience\": 12,\n    \"yearsExperienceLabel\": \"Years of Experience\",\n    \"teamMembers\": 30,\n    \"teamMembersLabel\": \"Team Members\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/site-settings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"site-settings"
+							]
+						}
+					}
+				}
+			],
+			"description": "Site settings management endpoints"
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/users?page=0&size=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get User by ID (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/users/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Create User (Public)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"newuser@altrevo.com\",\n    \"name\": \"New User\",\n    \"password\": \"userpassword\",\n    \"role\": \"EDITOR\",\n    \"isActive\": true,\n    \"isEmailVerified\": false,\n    \"avatarUrl\": \"https://example.com/avatar.jpg\",\n    \"phone\": \"+1-555-0000\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						},
+						"description": "Create a new user. No authentication required. This endpoint is public."
+					}
+				},
+				{
+					"name": "Update User (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"updateduser@altrevo.com\",\n    \"name\": \"Updated User\",\n    \"password\": \"newpassword\",\n    \"role\": \"ADMIN\",\n    \"isActive\": true,\n    \"isEmailVerified\": true,\n    \"avatarUrl\": \"https://example.com/updated-avatar.jpg\",\n    \"phone\": \"+1-555-1111\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/users/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"1"
+							]
+						}
+					}
+				},
+				{
+					"name": "Delete User (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/users/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"1"
+							]
+						}
+					}
+				}
+			],
+			"description": "User management endpoints"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "refresh_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

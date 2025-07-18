@@ -1,0 +1,37 @@
+#version: '3.8'
+#
+#services:
+#  redis:
+#    image: redis:7-alpine
+#    container_name: altrevo-redis
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - redis_data:/data
+#    command: redis-server --appendonly yes --requirepass "redis123"
+#    restart: unless-stopped
+#    networks:
+#      - altrevo-network
+#
+#  redis-commander:
+#    image: rediscommander/redis-commander:latest
+#    container_name: altrevo-redis-commander
+#    hostname: redis-commander
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      - REDIS_HOSTS=local:altrevo-redis:6379
+#      - REDIS_PASSWORD=redis123
+#    depends_on:
+#      - redis
+#    restart: unless-stopped
+#    networks:
+#      - altrevo-network
+#
+#volumes:
+#  redis_data:
+#    driver: local
+#
+#networks:
+#  altrevo-network:
+#    driver: bridge
