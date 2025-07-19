@@ -2,7 +2,7 @@ package com.altrevo.consultancy.service;
 
 import com.altrevo.consultancy.entity.Service;
 import com.altrevo.consultancy.enums.ServiceStatus;
-import com.altrevo.consultancy.repository.ServiceRepository;
+import com.altrevo.consultancy.repository.ServiceInMemoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -15,25 +15,25 @@ import java.util.Optional;
 @Slf4j
 public class ServiceService {
     
-    private final ServiceRepository serviceRepository;
-    
+    private final ServiceInMemoryRepository serviceRepository;
+
     public List<Service> getAllActiveServices() {
-        return serviceRepository.findByStatusOrderBySortOrder(ServiceStatus.ACTIVE, Pageable.unpaged());
+        return serviceRepository.findByStatusOrderBySortOrder(ServiceStatus.ACTIVE);
     }
     
     public List<Service> getFeaturedServices() {
-        return serviceRepository.findFeaturedByStatus(ServiceStatus.ACTIVE, Pageable.unpaged());
+        return serviceRepository.findFeaturedByStatus(ServiceStatus.ACTIVE);
     }
     
     public List<Service> getPublicServices(String category, Boolean featured) {
         if (category != null && featured != null && featured) {
-            return serviceRepository.findByStatusAndCategory(ServiceStatus.ACTIVE, category, Pageable.unpaged());
+            return serviceRepository.findByStatusAndCategory(ServiceStatus.ACTIVE, category);
         } else if (category != null) {
-            return serviceRepository.findByStatusAndCategory(ServiceStatus.ACTIVE, category, Pageable.unpaged());
+            return serviceRepository.findByStatusAndCategory(ServiceStatus.ACTIVE, category);
         } else if (featured != null && featured) {
-            return serviceRepository.findFeaturedByStatus(ServiceStatus.ACTIVE, Pageable.unpaged());
+            return serviceRepository.findFeaturedByStatus(ServiceStatus.ACTIVE);
         } else {
-            return serviceRepository.findByStatusOrderBySortOrder(ServiceStatus.ACTIVE, Pageable.unpaged());
+            return serviceRepository.findByStatusOrderBySortOrder(ServiceStatus.ACTIVE);
         }
     }
     
@@ -43,9 +43,9 @@ public class ServiceService {
     
     public List<Service> getAllServices(ServiceStatus status, String category, Boolean featured) {
         if (status != null && category != null) {
-            return serviceRepository.findByStatusAndCategory(status, category, Pageable.unpaged());
+            return serviceRepository.findByStatusAndCategory(status, category);
         } else if (status != null) {
-            return serviceRepository.findByStatus(status, Pageable.unpaged());
+            return serviceRepository.findByStatus(status);
         } else {
             return serviceRepository.findAll();
         }

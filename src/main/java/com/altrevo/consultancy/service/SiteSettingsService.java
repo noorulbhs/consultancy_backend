@@ -1,7 +1,7 @@
 package com.altrevo.consultancy.service;
 
 import com.altrevo.consultancy.entity.SiteSettings;
-import com.altrevo.consultancy.repository.SiteSettingsRepository;
+import com.altrevo.consultancy.repository.SiteSettingsInMemoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SiteSettingsService {
     
-    private final SiteSettingsRepository siteSettingsRepository;
+    private final SiteSettingsInMemoryRepository siteSettingsRepository;
 
     public SiteSettings getSettings() {
 //        return siteSettingsRepository.findById("main-settings")

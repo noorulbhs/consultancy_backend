@@ -1,7 +1,7 @@
 package com.altrevo.consultancy.service;
 
 import com.altrevo.consultancy.entity.TeamMember;
-import com.altrevo.consultancy.repository.TeamMemberRepository;
+import com.altrevo.consultancy.repository.TeamMemberInMemoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -15,22 +15,18 @@ import java.util.Optional;
 @Slf4j
 public class TeamMemberService {
     
-    private final TeamMemberRepository teamMemberRepository;
-    
+    private final TeamMemberInMemoryRepository teamMemberRepository;
+
     public List<TeamMember> getAllPublicTeamMembers() {
-        return teamMemberRepository.findPublicTeamMembersOrderBySortOrder(Pageable.unpaged());
+        return teamMemberRepository.findAll();
     }
     
     public List<TeamMember> getFeaturedTeamMembers() {
-        return teamMemberRepository.findFeaturedTeamMembers(Pageable.unpaged());
+        return teamMemberRepository.findAll();
     }
     
     public List<TeamMember> getPublicTeamMembers(Boolean featured, String department) {
-        if (department != null) {
-            return teamMemberRepository.findByIsPublicTrueAndDepartment(department, Pageable.unpaged());
-        } else {
-            return teamMemberRepository.findByIsPublicTrue(Pageable.unpaged());
-        }
+        return teamMemberRepository.findAll();
     }
     
     public Optional<TeamMember> getTeamMemberById(Long id) {
@@ -38,13 +34,7 @@ public class TeamMemberService {
     }
     
     public List<TeamMember> getAllTeamMembers(Boolean isPublic, Boolean featured, String department) {
-        if (isPublic != null && isPublic && department != null) {
-            return teamMemberRepository.findByIsPublicTrueAndDepartment(department, Pageable.unpaged());
-        } else if (isPublic != null && isPublic) {
-            return teamMemberRepository.findByIsPublicTrue(Pageable.unpaged());
-        } else {
-            return teamMemberRepository.findAll();
-        }
+        return teamMemberRepository.findAll();
     }
     
     public TeamMember createTeamMember(TeamMember teamMember) {
@@ -89,26 +79,25 @@ public class TeamMemberService {
     }
     
     public long getPublicCount() {
-        return teamMemberRepository.countByIsPublicTrue();
+        return teamMemberRepository.findAll().size();
     }
     
     public long getDepartmentCount(String department) {
-        return teamMemberRepository.countByDepartment(department);
+        return teamMemberRepository.findAll().stream().filter(m -> department.equals(m.getDepartment())).count();
     }
     
     public boolean existsByEmail(String email) {
-        return teamMemberRepository.existsByEmail(email);
+        return teamMemberRepository.findAll().stream().anyMatch(m -> email.equals(m.getEmail()));
     }
     
     // Statistics methods
     
     public TeamMemberStats getTeamMemberStats() {
         log.info("Fetching team member statistics");
-        long totalMembers = teamMemberRepository.count();
-        long publicMembers = teamMemberRepository.countByIsPublicTrue();
-        long featuredMembers = teamMemberRepository.countByFeaturedTrue();
-        long privateMembers = teamMemberRepository.countByIsPublicFalse();
-        
+        long totalMembers = teamMemberRepository.findAll().size();
+        long publicMembers = teamMemberRepository.findAll().stream().filter(m -> Boolean.TRUE.equals(m.getIsPublic())).count();
+        long featuredMembers = teamMemberRepository.findAll().stream().filter(m -> Boolean.TRUE.equals(m.getFeatured())).count();
+        long privateMembers = teamMemberRepository.findAll().stream().filter(m -> Boolean.FALSE.equals(m.getIsPublic())).count();
         return new TeamMemberStats(totalMembers, publicMembers, featuredMembers, privateMembers);
     }
     

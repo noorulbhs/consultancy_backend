@@ -1,7 +1,7 @@
 package com.altrevo.consultancy.service;
 
 import com.altrevo.consultancy.entity.Enquiry;
-import com.altrevo.consultancy.repository.EnquiryRepository;
+import com.altrevo.consultancy.repository.EnquiryInMemoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EnquiryService {
     
-    private final EnquiryRepository enquiryRepository;
+    private final EnquiryInMemoryRepository enquiryRepository;
     private final WebhookService webhookService;
     
     public Enquiry createEnquiry(Enquiry enquiry) {

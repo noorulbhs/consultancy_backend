@@ -1,7 +1,7 @@
 package com.altrevo.consultancy.service;
 
 import com.altrevo.consultancy.entity.FeatureToggle;
-import com.altrevo.consultancy.repository.FeatureToggleRepository;
+import com.altrevo.consultancy.repository.FeatureToggleInMemoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,8 +16,8 @@ import java.util.Optional;
 @Slf4j
 public class FeatureToggleService {
     
-    private final FeatureToggleRepository featureToggleRepository;
-    
+    private final FeatureToggleInMemoryRepository featureToggleRepository;
+
     public List<FeatureToggle> getAllFeatureToggles() {
         log.info("Fetching all feature toggles");
         return featureToggleRepository.findAll();

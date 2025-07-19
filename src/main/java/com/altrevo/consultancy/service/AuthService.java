@@ -4,7 +4,7 @@ import com.altrevo.consultancy.dto.auth.LoginRequest;
 import com.altrevo.consultancy.dto.auth.LoginResponse;
 import com.altrevo.consultancy.dto.auth.RefreshTokenRequest;
 import com.altrevo.consultancy.entity.User;
-import com.altrevo.consultancy.repository.UserRepository;
+import com.altrevo.consultancy.repository.UserInMemoryRepository;
 import com.altrevo.consultancy.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     
     private final AuthenticationManager authenticationManager;
-    private final UserRepository userRepository;
+    private final UserInMemoryRepository userRepository = new UserInMemoryRepository();
     private final JwtTokenProvider tokenProvider;
     
     public LoginResponse login(LoginRequest request) {

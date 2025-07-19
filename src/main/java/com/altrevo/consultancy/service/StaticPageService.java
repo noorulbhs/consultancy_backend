@@ -1,7 +1,7 @@
 package com.altrevo.consultancy.service;
 
 import com.altrevo.consultancy.entity.StaticPage;
-import com.altrevo.consultancy.repository.StaticPageRepository;
+import com.altrevo.consultancy.repository.StaticPageInMemoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class StaticPageService {
     @Autowired
-    private StaticPageRepository staticPageRepository;
+    private StaticPageInMemoryRepository staticPageRepository;
 
     public List<StaticPage> getAllStaticPages() {
         return staticPageRepository.findAll();
@@ -47,11 +47,10 @@ public class StaticPageService {
     }
 
     public boolean deleteStaticPage(String id) {
-        if (!staticPageRepository.existsById(id)) {
+        if (!staticPageRepository.findById(id).isPresent()) {
             return false;
         }
         staticPageRepository.deleteById(id);
         return true;
     }
 }
-

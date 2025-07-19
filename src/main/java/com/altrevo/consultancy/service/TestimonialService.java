@@ -1,7 +1,7 @@
 package com.altrevo.consultancy.service;
 
 import com.altrevo.consultancy.entity.Testimonial;
-import com.altrevo.consultancy.repository.TestimonialRepository;
+import com.altrevo.consultancy.repository.TestimonialInMemoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,24 +13,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TestimonialService {
     
-    private final TestimonialRepository testimonialRepository;
-    
+    private final TestimonialInMemoryRepository testimonialRepository;
+
     public List<Testimonial> getAllPublishedTestimonials() {
-        return testimonialRepository.findPublishedTestimonialsOrderBySortOrder(Pageable.unpaged());
+        return testimonialRepository.findAll().stream().filter(t -> Boolean.TRUE.equals(t.getPublished())).toList();
     }
     
     public List<Testimonial> getFeaturedTestimonials() {
-        return testimonialRepository.findFeaturedTestimonials(Pageable.unpaged());
+        return testimonialRepository.findAll().stream().filter(t -> Boolean.TRUE.equals(t.getFeatured())).toList();
     }
     
     public List<Testimonial> getPublicTestimonials(Boolean featured, Integer rating) {
-        if (featured != null && featured) {
-            return testimonialRepository.findByPublishedTrue(Pageable.unpaged());
-        } else if (rating != null) {
-            return testimonialRepository.findByPublishedTrueAndRatingGreaterThanEqual(rating, Pageable.unpaged());
-        } else {
-            return testimonialRepository.findByPublishedTrue(Pageable.unpaged());
-        }
+        return testimonialRepository.findAll().stream().filter(t -> Boolean.TRUE.equals(t.getPublished())).toList();
     }
     
     public Optional<Testimonial> getTestimonialById(Long id) {
@@ -38,13 +32,7 @@ public class TestimonialService {
     }
     
     public List<Testimonial> getAllTestimonials(Boolean published, Boolean featured, Integer rating) {
-        if (published != null && published && rating != null) {
-            return testimonialRepository.findByPublishedTrueAndRatingGreaterThanEqual(rating, Pageable.unpaged());
-        } else if (published != null && published) {
-            return testimonialRepository.findByPublishedTrue(Pageable.unpaged());
-        } else {
-            return testimonialRepository.findAll();
-        }
+        return testimonialRepository.findAll();
     }
     
     public Testimonial createTestimonial(Testimonial testimonial) {
@@ -78,25 +66,41 @@ public class TestimonialService {
     }
     
     public long getPublishedCount() {
-        return testimonialRepository.countByPublishedTrue();
+        return testimonialRepository.findAll().stream().filter(t -> Boolean.TRUE.equals(t.getPublished())).count();
     }
-    
     public long getFeaturedCount() {
-        return testimonialRepository.countByPublishedTrueAndFeaturedTrue();
+        return testimonialRepository.findAll().stream().filter(t -> Boolean.TRUE.equals(t.getPublished()) && Boolean.TRUE.equals(t.getFeatured())).count();
     }
-    
     public Double getAverageRating() {
-        return testimonialRepository.getAverageRating();
+        return testimonialRepository.findAll().stream()
+            .filter(t -> t.getRating() != null)
+            .mapToInt(Testimonial::getRating)
+            .average()
+            .orElse(0.0);
+    }
+    public long count() {
+        return testimonialRepository.findAll().size();
+    }
+    public long countByPublishedTrue() {
+        return testimonialRepository.findAll().stream().filter(t -> Boolean.TRUE.equals(t.getPublished())).count();
+    }
+    public long countByFeaturedTrue() {
+        return testimonialRepository.findAll().stream().filter(t -> Boolean.TRUE.equals(t.getFeatured())).count();
+    }
+    public long countByPublishedFalse() {
+        return testimonialRepository.findAll().stream().filter(t -> Boolean.FALSE.equals(t.getPublished())).count();
+    }
+    public long countByPublishedTrueAndFeaturedTrue() {
+        return testimonialRepository.findAll().stream().filter(t -> Boolean.TRUE.equals(t.getPublished()) && Boolean.TRUE.equals(t.getFeatured())).count();
     }
     
     // Statistics methods
     
     public TestimonialStats getTestimonialStats() {
-        long totalTestimonials = testimonialRepository.count();
-        long publishedTestimonials = testimonialRepository.countByPublishedTrue();
-        long featuredTestimonials = testimonialRepository.countByFeaturedTrue();
-        long unpublishedTestimonials = testimonialRepository.countByPublishedFalse();
-        
+        long totalTestimonials = testimonialRepository.findAll().size();
+        long publishedTestimonials = testimonialRepository.findAll().stream().filter(t -> Boolean.TRUE.equals(t.getPublished())).count();
+        long featuredTestimonials = testimonialRepository.findAll().stream().filter(t -> Boolean.TRUE.equals(t.getFeatured())).count();
+        long unpublishedTestimonials = testimonialRepository.findAll().stream().filter(t -> Boolean.FALSE.equals(t.getPublished())).count();
         return new TestimonialStats(totalTestimonials, publishedTestimonials, featuredTestimonials, unpublishedTestimonials);
     }
     
