@@ -1,6 +1,7 @@
 package com.altrevo.consultancy.controller;
 
 import com.altrevo.consultancy.dto.ApiResponse;
+import com.altrevo.consultancy.repository.*;
 import com.altrevo.consultancy.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +47,7 @@ public class DashboardController {
     
     @Autowired
     private FeatureToggleService featureToggleService;
-    
+
     @GetMapping("/dashboard/stats")
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
     @Operation(summary = "Get dashboard statistics", description = "Retrieve comprehensive dashboard statistics")

@@ -1,6 +1,5 @@
-package com.altrevo.consultancy.repository;
+package com.altrevo.consultancy.entity;
 
-import com.altrevo.consultancy.entity.Project;
 import java.util.HashMap;
 import java.util.Map;
 

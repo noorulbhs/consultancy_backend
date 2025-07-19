@@ -1,11 +1,10 @@
 package com.altrevo.consultancy.service;
 
 import com.altrevo.consultancy.entity.Job;
-import com.altrevo.consultancy.repository.JobRepository;
+import com.altrevo.consultancy.repository.JobInMemoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,53 +18,53 @@ public class JobService {
     private static final Logger logger = LoggerFactory.getLogger(JobService.class);
     
     @Autowired
-    private JobRepository jobRepository;
-    
+    private JobInMemoryRepository jobRepository;
+
     // Public methods (no authentication required)
     
     public List<Job> getPublicJobs() {
         logger.info("Fetching public jobs");
-        return jobRepository.findByIsPublicTrueAndIsOpenTrueOrderByCreatedAtDesc(Pageable.unpaged());
+        return jobRepository.findByIsPublicTrueAndIsOpenTrueOrderByCreatedAtDesc();
     }
     
     public List<Job> getFeaturedJobs() {
         logger.info("Fetching featured jobs");
-        return jobRepository.findByIsPublicTrueAndIsOpenTrueAndFeaturedTrueOrderByCreatedAtDesc(Pageable.unpaged());
+        return jobRepository.findByIsPublicTrueAndIsOpenTrueAndFeaturedTrueOrderByCreatedAtDesc();
     }
     
     public List<Job> getJobsByDepartment(String department) {
         logger.info("Fetching jobs by department: {}", department);
-        return jobRepository.findByIsPublicTrueAndIsOpenTrueAndDepartmentIgnoreCaseOrderByCreatedAtDesc(department, Pageable.unpaged());
+        return jobRepository.findByIsPublicTrueAndIsOpenTrueAndDepartmentIgnoreCaseOrderByCreatedAtDesc(department);
     }
     
     public List<Job> getJobsByType(String type) {
         logger.info("Fetching jobs by type: {}", type);
-        return jobRepository.findByIsPublicTrueAndIsOpenTrueAndTypeIgnoreCaseOrderByCreatedAtDesc(type, Pageable.unpaged());
+        return jobRepository.findByIsPublicTrueAndIsOpenTrueAndTypeIgnoreCaseOrderByCreatedAtDesc(type);
     }
     
     public List<Job> getJobsByLocation(String location) {
         logger.info("Fetching jobs by location: {}", location);
-        return jobRepository.findByIsPublicTrueAndIsOpenTrueAndLocationIgnoreCaseOrderByCreatedAtDesc(location, Pageable.unpaged());
+        return jobRepository.findByIsPublicTrueAndIsOpenTrueAndLocationIgnoreCaseOrderByCreatedAtDesc(location);
     }
     
     public List<Job> getJobsByLevel(String level) {
         logger.info("Fetching jobs by level: {}", level);
-        return jobRepository.findByIsPublicTrueAndIsOpenTrueAndLevelIgnoreCaseOrderByCreatedAtDesc(level, Pageable.unpaged());
+        return jobRepository.findByIsPublicTrueAndIsOpenTrueAndLevelIgnoreCaseOrderByCreatedAtDesc(level);
     }
     
     public List<Job> getJobsBySalaryRange(Double minSalary, Double maxSalary) {
         logger.info("Fetching jobs by salary range: {}-{}", minSalary, maxSalary);
-        return jobRepository.findBySalaryRange(minSalary, maxSalary, Pageable.unpaged());
+        return jobRepository.findBySalaryRange(minSalary, maxSalary);
     }
     
     public List<Job> getJobsByMaxExperience(Integer experience) {
         logger.info("Fetching jobs by max experience: {}", experience);
-        return jobRepository.findByMaxExperience(experience, Pageable.unpaged());
+        return jobRepository.findByMaxExperience(experience);
     }
     
     public List<Job> searchJobs(String keyword) {
         logger.info("Searching jobs with keyword: {}", keyword);
-        return jobRepository.findByKeyword(keyword, Pageable.unpaged());
+        return jobRepository.findByKeyword(keyword);
     }
     
     public Optional<Job> getPublicJobById(Long id) {

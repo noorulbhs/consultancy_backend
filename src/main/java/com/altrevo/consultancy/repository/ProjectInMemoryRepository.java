@@ -1,5 +1,6 @@
 package com.altrevo.consultancy.repository;
 
+import com.altrevo.consultancy.entity.InMemoryProjectStore;
 import com.altrevo.consultancy.entity.Project;
 import java.util.*;
 
