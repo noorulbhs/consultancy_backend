@@ -5,7 +5,7 @@ import com.altrevo.consultancy.entity.*;
 import com.altrevo.consultancy.enums.ProjectStatus;
 import com.altrevo.consultancy.enums.ProjectPriority;
 import com.altrevo.consultancy.repository.MilestoneRepository;
-import com.altrevo.consultancy.repository.ProjectRepository;
+import com.altrevo.consultancy.repository.ProjectInMemoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,7 @@ public class ProjectService {
     
     private static final Logger logger = LoggerFactory.getLogger(ProjectService.class);
     
-    @Autowired
-    private ProjectRepository projectRepository;
+    private final ProjectInMemoryRepository projectRepository = new ProjectInMemoryRepository();
 
     @Autowired
     private MilestoneRepository milestoneRepository;

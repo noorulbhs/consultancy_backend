@@ -52,10 +52,10 @@ public class Project extends BaseEntity {
     private LocalDateTime endDate;
 
     @Column(name = "estimated_budget")
-    private BigDecimal estimatedBudget;
+    private Double estimatedBudget;
 
     @Column(name = "actual_budget")
-    private BigDecimal actualBudget;
+    private Double actualBudget;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
