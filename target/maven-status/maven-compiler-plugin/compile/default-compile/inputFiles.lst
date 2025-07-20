@@ -1,79 +1,93 @@
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\ProjectTeamMember.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\TeamMemberService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\Service.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\WebhookService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\config\WebConfig.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\enums\BlogStatus.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\dto\ErrorDetails.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\FeatureToggleService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\enums\Role.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\ScheduledTaskService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\dto\ApiResponse.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\Project.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\User.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\ServiceService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\WebhookEventRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\JobService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\BlogService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\dto\auth\LoginResponse.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\TestimonialController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\security\JwtAuthenticationEntryPoint.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\BlogController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\ProjectDocument.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\exception\GlobalExceptionHandler.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\ServiceRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\Testimonial.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\TeamMemberRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\AuthController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\SiteSettingsController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\SiteSettings.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\AdminUserController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\TestimonialRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\FileUploadController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\enums\MilestoneStatus.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\DashboardController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\dto\EnquiryListResponse.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\config\RedisConfig.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\WebhookController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\SiteSettingsService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\ProjectController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\Enquiry.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\EnquiryController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\ServiceController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\BlogPost.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\AuthService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\ConsultancyBackendApplication.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\BaseEntity.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\ProjectMilestone.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\SiteSettingsRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\DebugController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\FeatureToggle.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\FeatureToggleRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\UserRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\EnquiryService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\TeamMember.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\security\JwtAuthenticationFilter.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\WebhookEvent.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\enums\ProjectPriority.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\EnquiryRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\JobRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\FeatureToggleController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\enums\ProjectStatus.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\BlogPostRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\TestimonialService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\JobController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\enums\ServiceStatus.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\entity\Job.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\dto\PaginationResponse.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\util\PasswordGenerator.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\dto\EnquiryStats.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\dto\EnquirySubmissionResponse.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\dto\admin\CreateUserRequest.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\dto\auth\RefreshTokenRequest.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\ProjectService.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\config\SecurityConfig.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\dto\auth\LoginRequest.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\repository\ProjectRepository.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\controller\TeamMemberController.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\security\JwtTokenProvider.java
-D:\Consultancy\Backend\src\main\java\com\altrevo\consultancy\service\UserDetailsServiceImpl.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\DashboardController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\config\WebConfig.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\EnquirySubmissionResponse.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\TeamMemberInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\EnquiryService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\Job.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\BlogInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\TeamMemberService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\ConsultancyBackendApplication.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\AdminUserController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemoryStaticPageStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemoryTestimonialStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\AdminUserService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\FeatureToggleController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemoryJobStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemoryServiceStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\enums\ServiceStatus.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\StaticPageController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\PaginationResponse.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\UserDetailsServiceImpl.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\util\PasswordGenerator.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\enums\Role.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\EnquiryController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\Project.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\SiteSettingsInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemoryUserStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\enums\BlogStatus.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\StaticPageService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\ServiceInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\EnquiryInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\admin\CreateUserRequest.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemoryEnquiryStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\exception\GlobalExceptionHandler.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemoryTeamMemberStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\JobInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\security\JwtTokenProvider.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\ApiResponse.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\FeatureToggleUpdateRequest.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\BlogPost.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\ProjectExternalTeamMember.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\UserInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\security\JwtAuthenticationEntryPoint.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\ProjectMilestone.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\ProjectTeamMember.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\TeamMember.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\TestimonialController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\ProjectController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\BaseEntity.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\EnquiryStats.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\TestimonialInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\ProjectService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\FeatureToggleService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\ProjectInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\TestimonialService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\JsonMapConverter.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\StaticPageInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\FeatureToggle.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\SiteSettingsService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\Enquiry.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\ServiceService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\User.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\AllDocument.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\EnquiryListResponse.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\TeamMemberController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\JobService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\config\SecurityConfig.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\auth\LoginRequest.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\FileUploadController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\JobController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\enums\ProjectPriority.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\ProjectSummary.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\ProjectDocument.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\repository\FeatureToggleInMemoryRepository.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\SiteSettings.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\enums\ProjectStatus.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemorySiteSettingsStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\StaticPage.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\enums\MilestoneStatus.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\AuthController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\BlogController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\auth\RefreshTokenRequest.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\security\JwtAuthenticationFilter.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\ErrorDetails.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemoryBlogStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\ServiceController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\controller\SiteSettingsController.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemoryFeatureToggleStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\InMemoryProjectStore.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\Testimonial.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\entity\Service.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\AuthService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\service\BlogService.java
+D:\Consultancy\New folder\Backend\src\main\java\com\altrevo\consultancy\dto\auth\LoginResponse.java
