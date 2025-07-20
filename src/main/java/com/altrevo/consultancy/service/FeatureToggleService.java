@@ -43,7 +43,7 @@ public class FeatureToggleService {
         return featureToggleRepository.findById(id);
     }
     
-    @Transactional
+//    @Transactional
     public FeatureToggle updateFeatureToggle(String id, Boolean enabled, String updatedBy) {
         log.info("Updating feature toggle: {} to enabled: {} by: {}", id, enabled, updatedBy);
         
@@ -57,7 +57,7 @@ public class FeatureToggleService {
         return featureToggleRepository.save(featureToggle);
     }
     
-    @Transactional
+//    @Transactional
     public FeatureToggle createFeatureToggle(FeatureToggle featureToggle, String createdBy) {
         log.info("Creating new feature toggle: {} by: {}", featureToggle.getId(), createdBy);
         
@@ -67,7 +67,7 @@ public class FeatureToggleService {
         return featureToggleRepository.save(featureToggle);
     }
     
-    @Transactional
+//    @Transactional
     public void deleteFeatureToggle(String id) {
         log.info("Deleting feature toggle with ID: {}", id);
         

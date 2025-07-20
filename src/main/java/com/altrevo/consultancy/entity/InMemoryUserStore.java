@@ -58,7 +58,7 @@ public class InMemoryUserStore {
     }
 
     public static Optional<User> findByEmail(String email) {
-        System.out.println(users.get(email).toString());
+//        System.out.println(users.get(email).toString());
         return Optional.ofNullable(users.get(email));
     }
 

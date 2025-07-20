@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-@Transactional
 public class BlogService {
     private static final Logger logger = LoggerFactory.getLogger(BlogService.class);
     private final BlogInMemoryRepository blogPostRepository = new BlogInMemoryRepository();

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
+//@Transactional
 public class ProjectService {
     
     private static final Logger logger = LoggerFactory.getLogger(ProjectService.class);
