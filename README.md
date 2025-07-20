@@ -1,6 +1,6 @@
 # Altrevo Tech Solutions - IT Consultancy Backend
 
-A comprehensive Spring Boot backend application for Altrevo Tech Solutions IT Consultancy Platform. This backend provides a complete REST API for managing consultancy services, team members, testimonials, blog posts, job postings, projects, file uploads, feature toggles, webhooks, and admin dashboard analytics.
+A comprehensive Spring Boot backend application for Altrevo Tech Solutions IT Consultancy Platform. This backend provides a complete REST API for managing consultancy services, team members, testimonials, blog posts, job postings, projects, file uploads, feature toggles, and admin dashboard analytics.
 
 ## Features
 

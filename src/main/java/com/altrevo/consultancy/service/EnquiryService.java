@@ -6,9 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -16,7 +14,6 @@ import java.util.Optional;
 public class EnquiryService {
     
     private final EnquiryInMemoryRepository enquiryRepository;
-    private final WebhookService webhookService;
     
     public Enquiry createEnquiry(Enquiry enquiry) {
         // Generate reference number
@@ -26,24 +23,6 @@ public class EnquiryService {
         enquiry.setIsRead(false);
         
         Enquiry savedEnquiry = enquiryRepository.save(enquiry);
-        
-        // Trigger webhook for enquiry creation
-        try {
-            Map<String, Object> webhookData = new HashMap<>();
-            webhookData.put("enquiryId", savedEnquiry.getId());
-            webhookData.put("referenceNumber", savedEnquiry.getReferenceNumber());
-            webhookData.put("name", savedEnquiry.getName());
-            webhookData.put("email", savedEnquiry.getEmail());
-            webhookData.put("service", savedEnquiry.getService());
-            webhookData.put("subject", savedEnquiry.getSubject());
-            webhookData.put("timestamp", savedEnquiry.getCreatedAt());
-            
-            webhookService.createWebhookEvent("enquiry.created", webhookData, null, null);
-        } catch (Exception e) {
-            // Log error but don't fail enquiry creation
-            System.err.println("Failed to create webhook for enquiry: " + e.getMessage());
-        }
-        
         return savedEnquiry;
     }
     

@@ -2,7 +2,6 @@ package com.altrevo.consultancy.controller;
 
 import com.altrevo.consultancy.dto.ApiResponse;
 import com.altrevo.consultancy.entity.AllDocument;
-import com.altrevo.consultancy.repository.*;
 import com.altrevo.consultancy.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -42,9 +41,6 @@ public class DashboardController {
     
     @Autowired
     private ProjectService projectService;
-    
-    @Autowired
-    private WebhookService webhookService;
 
     @Autowired
     private SiteSettingsService siteSettingsService;
@@ -72,7 +68,6 @@ public class DashboardController {
         BlogService.BlogStats blogStats = blogService.getBlogStats();
         JobService.JobStats jobStats = jobService.getJobStats();
         ProjectService.ProjectStats projectStats = projectService.getProjectStats();
-        Map<String, Long> webhookStats = webhookService.getWebhookStats();
         
         // Create comprehensive dashboard stats
         DashboardStats dashboardStats = DashboardStats.builder()
@@ -83,7 +78,6 @@ public class DashboardController {
                 .blogs(blogStats)
                 .jobs(jobStats)
                 .projects(projectStats)
-                .webhooks(webhookStats)
                 .features(Map.of(
                     "total", featureToggleService.getTotalCount(),
                     "enabled", featureToggleService.getEnabledCount(),
@@ -113,7 +107,6 @@ public class DashboardController {
         BlogService.BlogStats blogStats = blogService.getBlogStats();
         JobService.JobStats jobStats = jobService.getJobStats();
         ProjectService.ProjectStats projectStats = projectService.getProjectStats();
-        Map<String, Long> webhookStats = webhookService.getWebhookStats();
         
         // Add key metrics
         overview.put("totalServices", serviceStats.totalServices);
@@ -130,11 +123,6 @@ public class DashboardController {
         overview.put("openJobs", jobStats.openJobs);
         overview.put("totalProjects", projectStats.totalProjects);
         overview.put("activeProjects", projectStats.activeProjects);
-        
-        // Add webhook stats
-        overview.put("totalWebhooks", webhookStats.get("total"));
-        overview.put("processedWebhooks", webhookStats.get("processed"));
-        overview.put("failedWebhooks", webhookStats.get("failed"));
         
         // Add feature toggle stats
         overview.put("totalFeatures", featureToggleService.getTotalCount());
@@ -156,7 +144,6 @@ public class DashboardController {
         public final BlogService.BlogStats blogs;
         public final JobService.JobStats jobs;
         public final ProjectService.ProjectStats projects;
-        public final Map<String, Long> webhooks;
         public final Map<String, Long> features;
         
         private DashboardStats(ServiceService.ServiceStats services,
@@ -166,7 +153,6 @@ public class DashboardController {
                               BlogService.BlogStats blogs,
                               JobService.JobStats jobs,
                               ProjectService.ProjectStats projects,
-                              Map<String, Long> webhooks,
                               Map<String, Long> features) {
             this.services = services;
             this.teamMembers = teamMembers;
@@ -175,7 +161,6 @@ public class DashboardController {
             this.blogs = blogs;
             this.jobs = jobs;
             this.projects = projects;
-            this.webhooks = webhooks;
             this.features = features;
         }
         
@@ -191,7 +176,6 @@ public class DashboardController {
             private BlogService.BlogStats blogs;
             private JobService.JobStats jobs;
             private ProjectService.ProjectStats projects;
-            private Map<String, Long> webhooks;
             private Map<String, Long> features;
             
             public DashboardStatsBuilder services(ServiceService.ServiceStats services) {
@@ -229,18 +213,13 @@ public class DashboardController {
                 return this;
             }
             
-            public DashboardStatsBuilder webhooks(Map<String, Long> webhooks) {
-                this.webhooks = webhooks;
-                return this;
-            }
-            
             public DashboardStatsBuilder features(Map<String, Long> features) {
                 this.features = features;
                 return this;
             }
             
             public DashboardStats build() {
-                return new DashboardStats(services, teamMembers, testimonials, enquiries, blogs, jobs, projects, webhooks, features);
+                return new DashboardStats(services, teamMembers, testimonials, enquiries, blogs, jobs, projects, features);
             }
         }
     }
