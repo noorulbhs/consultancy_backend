@@ -14,13 +14,13 @@ public class WebConfig implements WebMvcConfigurer {
     private String uploadDir;
 
     @Value("${cors.allowed-origins}")
-    private String[] corsAllowedOrigins;
+    private String corsAllowedOrigins;
 
     @Value("${cors.allowed-methods}")
-    private String[] corsAllowedMethods;
+    private String corsAllowedMethods;
 
     @Value("${cors.allowed-headers}")
-    private String[] corsAllowedHeaders;
+    private String corsAllowedHeaders;
 
     @Value("${cors.allow-credentials}")
     private boolean corsAllowCredentials;
@@ -38,9 +38,9 @@ public class WebConfig implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(corsAllowedOrigins)
-                        .allowedMethods(corsAllowedMethods)
-                        .allowedHeaders(corsAllowedHeaders)
+                        .allowedOriginPatterns(corsAllowedOrigins.split(","))
+                        .allowedMethods(corsAllowedMethods.split(","))
+                        .allowedHeaders(corsAllowedHeaders.split(","))
                         .allowCredentials(corsAllowCredentials);
             }
         };

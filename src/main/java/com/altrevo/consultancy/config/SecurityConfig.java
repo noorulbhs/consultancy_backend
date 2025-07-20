@@ -4,6 +4,7 @@ import com.altrevo.consultancy.security.JwtAuthenticationEntryPoint;
 import com.altrevo.consultancy.security.JwtAuthenticationFilter;
 import com.altrevo.consultancy.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -34,6 +35,18 @@ public class SecurityConfig {
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Value("${cors.allowed-origins}")
+    private String corsAllowedOrigins;
+
+    @Value("${cors.allowed-methods}")
+    private String corsAllowedMethods;
+
+    @Value("${cors.allowed-headers}")
+    private String[] corsAllowedHeaders;
+
+    @Value("${cors.allow-credentials}")
+    private boolean corsAllowCredentials;
     
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -113,16 +126,22 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList(
-            "http://localhost:3000",
-            "http://localhost:3001",
-            "http://localhost:4200",
-            "https://altrevo.com",
-            "https://*.altrevo.com"
-        ));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowCredentials(true);
+//        configuration.setAllowedOriginPatterns(Arrays.asList(
+//            "http://localhost:4200",
+//            "https://altrevo.com",
+//            "https://*.altrevo.com",
+//            "https://enchanting-moonbeam-603acd.netlify.app"
+//        ));
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+//        configuration.setAllowedHeaders(Arrays.asList("*"));
+//        configuration.setAllowCredentials(true);
+
+        configuration.setAllowedOriginPatterns(Arrays.asList(corsAllowedOrigins.split(",")));
+        configuration.setAllowedMethods(Arrays.asList(corsAllowedMethods.split(",")));
+        configuration.setAllowedHeaders(Arrays.asList(corsAllowedHeaders));
+        configuration.setAllowCredentials(corsAllowCredentials);
+
+
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
