@@ -2,6 +2,9 @@ package com.altrevo.consultancy.repository;
 
 import com.altrevo.consultancy.entity.InMemoryProjectStore;
 import com.altrevo.consultancy.entity.Project;
+import com.altrevo.consultancy.entity.ProjectMilestone;
+import com.altrevo.consultancy.enums.MilestoneStatus;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class ProjectInMemoryRepository {
@@ -165,5 +168,17 @@ public class ProjectInMemoryRepository {
 
     public double averageProgress() {
         return findAll().stream().mapToDouble(p -> p.getProgress() != null ? p.getProgress() : 0).average().orElse(0);
+    }
+
+    /**
+     * Counts all overdue milestones (dueDate before now and not COMPLETED) across all projects.
+     */
+    public long countOverdueMilestones(LocalDateTime now) {
+        return findAll().stream()
+            .filter(p -> p.getMilestones() != null)
+            .flatMap(p -> p.getMilestones().stream())
+            .filter(m -> m.getDueDate() != null && m.getDueDate().isBefore(now))
+            .filter(m -> m.getStatus() != MilestoneStatus.COMPLETED)
+            .count();
     }
 }

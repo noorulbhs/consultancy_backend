@@ -2,7 +2,6 @@ package com.altrevo.consultancy.service;
 
 import com.altrevo.consultancy.entity.User;
 import com.altrevo.consultancy.repository.UserInMemoryRepository;
-import com.altrevo.consultancy.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

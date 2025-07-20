@@ -4,7 +4,6 @@ import com.altrevo.consultancy.dto.ProjectSummary;
 import com.altrevo.consultancy.entity.*;
 import com.altrevo.consultancy.enums.ProjectStatus;
 import com.altrevo.consultancy.enums.ProjectPriority;
-import com.altrevo.consultancy.repository.MilestoneRepository;
 import com.altrevo.consultancy.repository.ProjectInMemoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +23,6 @@ public class ProjectService {
     private static final Logger logger = LoggerFactory.getLogger(ProjectService.class);
     
     private final ProjectInMemoryRepository projectRepository = new ProjectInMemoryRepository();
-
-    @Autowired
-    private MilestoneRepository milestoneRepository;
     
     // Admin methods (all project operations are admin-only)
     
@@ -295,7 +291,7 @@ public class ProjectService {
         double totalBudget = projectRepository.sumBudget();
         double totalActualCost = projectRepository.sumActualCost();
         double averageProgress = projectRepository.averageProgress();
-        long overdueMilestones = milestoneRepository.countOverdueMilestones(LocalDateTime.now());
+        long overdueMilestones = projectRepository.countOverdueMilestones(LocalDateTime.now());
 
         return ProjectSummary.builder()
                 .totalProjects(totalProjects)
