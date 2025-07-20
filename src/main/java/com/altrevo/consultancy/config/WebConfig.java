@@ -38,7 +38,8 @@ public class WebConfig implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOriginPatterns(corsAllowedOrigins)
+//                        .allowedOriginPatterns(corsAllowedOrigins)
+                        .allowedOrigins(corsAllowedOrigins)
                         .allowedMethods(corsAllowedMethods)
                         .allowedHeaders(corsAllowedHeaders)
                         .allowCredentials(corsAllowCredentials);
