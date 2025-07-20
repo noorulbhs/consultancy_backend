@@ -1,6 +1,7 @@
 package com.altrevo.consultancy.controller;
 
 import com.altrevo.consultancy.dto.ApiResponse;
+import com.altrevo.consultancy.entity.AllDocument;
 import com.altrevo.consultancy.repository.*;
 import com.altrevo.consultancy.service.*;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-//@RequestMapping("/api/v1/admin")
+@RequestMapping("/admin")
 @Tag(name = "Dashboard", description = "Admin dashboard analytics")
 public class DashboardController {
     
@@ -44,9 +45,18 @@ public class DashboardController {
     
     @Autowired
     private WebhookService webhookService;
+
+    @Autowired
+    private SiteSettingsService siteSettingsService;
+
+    @Autowired
+    private StaticPageService staticPageService;
     
     @Autowired
     private FeatureToggleService featureToggleService;
+
+    @Autowired
+    private AdminUserService adminUserService;
 
     @GetMapping("/dashboard/stats")
     @PreAuthorize("hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
@@ -233,5 +243,31 @@ public class DashboardController {
                 return new DashboardStats(services, teamMembers, testimonials, enquiries, blogs, jobs, projects, webhooks, features);
             }
         }
+    }
+
+    // In DashboardController.java
+
+    @GetMapping("/dashboard/all-document")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPER_ADMIN')")
+    @Operation(summary = "Get all data as a document", description = "Fetches all data from services and creates an AllDocument entity")
+    public ResponseEntity<ApiResponse<AllDocument>> getAllDocument() {
+        AllDocument allDocument = new AllDocument();
+
+        allDocument.setServices(serviceService.getAllServices(null,null,null));
+        allDocument.setTeamMembers(teamMemberService.getAllTeamMembers(null,null,null));
+        allDocument.setTestimonials(testimonialService.getAllTestimonials(null,null,null));
+        allDocument.setEnquiries(enquiryService.getAllEnquiries(null, null, null, null, null));
+        allDocument.setBlogs(blogService.getAllBlogs(null, null, null, 0,Integer.MAX_VALUE ));
+        allDocument.setJobs(jobService.getAllJobs());
+        allDocument.setProjects(projectService.getAllProjects(null, null, null, null));
+        allDocument.setSiteSettings(siteSettingsService.getSettings());
+        allDocument.setStaticPages(staticPageService.getAllStaticPages());
+        allDocument.setFeatureToggles(featureToggleService.getAllFeatureToggles());
+        allDocument.setUsers(adminUserService.getAllUsers());
+
+        return ResponseEntity.ok(ApiResponse.<AllDocument>builder()
+                .success(true)
+                .data(allDocument)
+                .build());
     }
 }

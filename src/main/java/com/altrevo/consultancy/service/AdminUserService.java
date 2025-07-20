@@ -7,6 +7,8 @@ import com.altrevo.consultancy.repository.UserInMemoryRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdminUserService {
     private final UserInMemoryRepository userRepository = new UserInMemoryRepository();
@@ -31,6 +33,10 @@ public class AdminUserService {
         user.setPhone(request.getPhone());
         userRepository.save(user);
         return ApiResponse.success("User created", user);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
 
